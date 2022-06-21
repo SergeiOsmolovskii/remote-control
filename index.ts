@@ -3,6 +3,7 @@ import { httpServer } from './src/http_server/index.js';
 import robot from 'robotjs';
 import { WebSocketServer } from 'ws';
 import { mouseCommadns } from './src/commands/mouseMoveCommands.js';
+import { drawingCommadns } from './src/commands/drawingCommands.js';
 
 const HTTP_PORT = 3000;
 const HTTP_WS_PORT = 8080;
@@ -25,7 +26,7 @@ wss.on('connection', (ws) => {
       mouseCommadns(command, params);
       ws.send(command);
     } else if (command.includes('draw_')) {
-      console.log('draw');
+      drawingCommadns(command, params);
       ws.send(command);
     } else if (command.includes('prnt_')) {
       ws.send(command);

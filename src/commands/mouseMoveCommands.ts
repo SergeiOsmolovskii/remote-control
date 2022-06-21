@@ -1,5 +1,4 @@
 import robot from 'robotjs';
-import { WebSocketServer } from 'ws';
 
 export const mouseCommadns = (command: string, params: string[]) => {
 
