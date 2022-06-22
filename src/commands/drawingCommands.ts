@@ -26,8 +26,14 @@ const drawCircle = (radius: string) => {
   robot.mouseToggle('up');
 }
 
-const drawRectangle = (X: string, Y: string) => {
-
+const drawRectangle = (width: string,  length: string) => {
+  const mousePos = robot.getMousePos();
+  robot.mouseToggle('down', 'left');
+  robot.moveMouseSmooth(mousePos.x + Number(width), mousePos.y, 40);
+  robot.moveMouseSmooth(mousePos.x + Number(width), mousePos.y + Number(length), 40);
+  robot.moveMouseSmooth(mousePos.x, mousePos.y + Number(length), 40);
+  robot.moveMouseSmooth(mousePos.x, mousePos.y, 40);
+  robot.mouseToggle('up');
 }
 
 const drawSquare = (width: string) => {
