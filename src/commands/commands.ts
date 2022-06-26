@@ -1,21 +1,21 @@
-import { WebSocket } from 'ws';
 import { mouseCommadns } from './mouseMoveCommands.js';
 import { drawingCommadns } from './drawingCommands.js';
 import { printScreen } from './print.js';
 import robot from 'robotjs';
+import internal from 'stream';
 
-export const commands = (command: string, ws: WebSocket, params: string[]) => {
+export const commands = (command: string, wsStream: internal.Duplex, params: string[]) => {
   
   if (command === 'mouse_position' ) {
     const curreentMousePosition = robot.getMousePos();
-    ws.send(`mouse_position ${curreentMousePosition.x},${curreentMousePosition.y}`);
+    wsStream.write(`mouse_position ${curreentMousePosition.x},${curreentMousePosition.y}`);
   } else if (command.includes('mouse_')) {
     mouseCommadns(command, params);
-    ws.send(command);
+    wsStream.write(command);
   } else if (command.includes('draw_')) {
     drawingCommadns(command, params);
-    ws.send(command);
+    wsStream.write(command);
   } else if (command.includes('prnt_')) {
-    printScreen(ws);
+    printScreen(wsStream);
   }
 }

@@ -1,9 +1,8 @@
 import robot from 'robotjs';
 import Jimp from 'jimp';
-import { WebSocket } from 'ws';
+import internal from 'stream';
 
-
-export const printScreen = (ws: WebSocket) => {
+export const printScreen = (wsStream: internal.Duplex) => {
   const mousePos = robot.getMousePos();
   const currentX = mousePos.x - 100;
   const currentY = mousePos.y - 100;
@@ -21,7 +20,7 @@ export const printScreen = (ws: WebSocket) => {
 
     image.getBuffer(Jimp.MIME_PNG, (err: Error, buffer: string) => {
       const data = Buffer.from(buffer, 'base64');
-      ws.send(`prnt_scrn ${data.toString('base64')}`);
+      wsStream.write(`prnt_scrn ${data.toString('base64')}`);
     });
   });
 };

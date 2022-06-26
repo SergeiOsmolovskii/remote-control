@@ -15,22 +15,22 @@ export const mouseCommadns = (command: string, params: string[]) => {
   }
 };
 
-const mouseUp = (Y) => {
+const mouseUp = (Y: string) => {
   const curreentMousePosition = robot.getMousePos();
   robot.moveMouse(curreentMousePosition.x, curreentMousePosition.y - Number(Y));
 }
 
-const mouseDown = (Y) => {
+const mouseDown = (Y: string) => {
   const curreentMousePosition = robot.getMousePos();
   robot.moveMouse(curreentMousePosition.x, curreentMousePosition.y + Number(Y));
 }
 
-const mouseLeft = (X) => {
+const mouseLeft = (X: string) => {
   const curreentMousePosition = robot.getMousePos();
   robot.moveMouse(curreentMousePosition.x - Number(X), curreentMousePosition.y);
 }
 
-const mouseRight = (X) => {
+const mouseRight = (X: string) => {
   const curreentMousePosition = robot.getMousePos();
   robot.moveMouse(curreentMousePosition.x + Number(X), curreentMousePosition.y);
 }
